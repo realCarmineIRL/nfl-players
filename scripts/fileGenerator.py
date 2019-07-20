@@ -1,6 +1,5 @@
 import requests
 from datetime import datetime
-import sys
 import os
 import boto3
 
@@ -8,7 +7,7 @@ import boto3
 s3 = boto3.client("s3", aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
 bucket_resource = s3
 
-url = sys.argv[1]
+endpoints = ['https://api.sleeper.app/v1/players/nfl','https://api.sleeper.app/v1/players/nfl/trending/add','https://api.sleeper.app/v1/players/nfl/trending/drop']
 
 
 def get_sleeper_data(url):
@@ -31,4 +30,5 @@ def get_sleeper_data(url):
         print('error getting players')
 
 
-get_sleeper_data(url)
+for url in endpoints:
+    get_sleeper_data(url)
